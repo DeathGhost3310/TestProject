@@ -11,7 +11,7 @@ public:
 	};
 	T getValue(int x, int y){
        if(x < xm && y < ym){
-         return array[x][y];
+         return array[x*y];
 	   }
 	   else{
 		std::cout << "not of range" << std::endl;
@@ -73,6 +73,7 @@ private:
 		
 	}
 	void DeleteArray(T** arr){
+		//поменять
 		for(int i = 0;i < xm,i++){
 			delete[] arr[i];
 		}
@@ -81,9 +82,7 @@ private:
 
 	void NewArray(int xmax, int yMax){
      	array = new T* [xmax];
-		for (int i = 0; i < xmax; i++) {
-        	array[i] = new T [yMax];
-		}
+		
         
 		xm = xmax;
 		ym = yMax;
@@ -91,7 +90,7 @@ private:
 	}
 
 private:	
-	T **array;	//T **array
+	T *array;	//T **array
     int xm = 0;
 	int ym = 0;
 

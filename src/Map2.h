@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <vector>
 
 template <typename T>
 class Map
@@ -91,7 +92,7 @@ private:
 	}
 
 private:	
-	T **array;	//T **array
+	std::vector array;	
     int xm = 0;
 	int ym = 0;
 

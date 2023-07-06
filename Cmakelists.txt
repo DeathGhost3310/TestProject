@@ -1,10 +1,13 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required (VERSION 3.21)
 
 file(GLOB helloworld_SRC
      "*.h"
      "*.cpp"
 )
 
-# add_executable(helloworld ${helloworld_SRC})
+add_executable(helloworld
+ src/main.cpp
+ src/Map.cpp
+ )
 
-project(helloworld ${helloworld_SRC})
+# project(helloworld ${helloworld_SRC})
