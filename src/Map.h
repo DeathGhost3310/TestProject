@@ -50,7 +50,7 @@ public:
 		NewArray(xmax,ymax);
 		
 		for(int i = 0;i < xm,i++){
-			for(int j = 0, j < ym,j++){
+			for(int j = 0; j < ym;j++){
                array[i][j] = Tarr[i][j];
 			}
 

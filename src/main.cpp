@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "Map1.h"
+#include "Map.h"
 
 //указатели
 //шаблоны
