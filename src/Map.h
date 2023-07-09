@@ -7,7 +7,11 @@ class Map
 public:
 
 	Map(int xmax, int yMax){
-		NewArray(xmax, yMax);	
+		T array[xmax][yMax];
+		int* a = &xm;
+		int* b = &ym;
+		*a = xmax;
+		*b = yMax;
 	};
 	T getValue(int x, int y){
        if(x < xm && y < ym){
@@ -20,81 +24,32 @@ public:
 	};
 	void setValue(int x, int y, T empty){
 		if(x < xm && y < ym){
-		  array[x][y] = empty;
-		} else{
-			std::cout << "eror" << std::endl;
-		}
-
-	};
-	 void print(){
-		 for (int i = 0; i < xm; i++) {
-			 for (int j = 0; j < ym; j++) {
-				std::cout << array[i][j] << "  ";
-	 		}
-			 std::cout << std::endl;
+		array[x][y] = empty;
 		}
 	};
-
-
-
+	static void print(int x, int y){
+		std::cout << array[x][y] << std::endl;
+	};
 	void changeSize(int xmax, int ymax){
-		// T Tarr[xm][ym];
-		
-		// for(int i = 0;i < xm,i++){
-		// 	for(int j = 0, j < ym,j++){
-        //        Tarr[i][j] = array[i][j];
-		// 	}
-		// }
-		T ** Tarr = array;
-
-		NewArray(xmax,ymax);
-		
-		for(int i = 0;i < xm,i++){
-			for(int j = 0; j < ym;j++){
+		T Tarr[xmax][ymax];
+		for(int i = 0;i < xmax,i++){
+			for(int j = 0, j < ymax,j++){
+               Tarr[i][j] = array[i][j];
+			}
+		}
+		delete array;
+		array[xmax][ymax];
+		for(int i = 0;i < xmax,i++){
+			for(int j = 0, j < ymax,j++){
                array[i][j] = Tarr[i][j];
 			}
-
-			
 		}
-
-		DeleteArray(Tarr);
+		delete Tarr;
 	};
-
-private:
-	void CleanArray(){
-		for (int i = 0; i < xm; i++)
-		{
-			for (int j = 0; j < ym;j++)
-			{
-				array[i][j] = 0;
-			}
-			
-		}
-		
-	}
-	void DeleteArray(T** arr){
-		for(int i = 0;i < xm,i++){
-			delete[] arr[i];
-		}
-		delete[] arr;
-	}
-
-	void NewArray(int xmax, int yMax){
-     	array = new T* [xmax];
-		for (int i = 0; i < xmax; i++) {
-        	array[i] = new T [yMax];
-		}
-        
-		xm = xmax;
-		ym = yMax;
-		CleanArray();
-	}
-
 private:	
-	T **array;	//T **array
+	T *array;	//T **array
     int xm = 0;
 	int ym = 0;
 
 };
-
 

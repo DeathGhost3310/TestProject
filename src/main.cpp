@@ -1,6 +1,6 @@
 
 #include <iostream>
-#include "Map.h"
+#include "Map1.h"
 
 //указатели
 //шаблоны
@@ -8,8 +8,9 @@
 
 int main()
 {
-	Map<bool> map(21, 21);
 
+	Map<bool> map(20, 20);
+    
 	map.setValue(0, 0, true);
 
 	map.setValue(0, 1, true);
@@ -20,15 +21,15 @@ int main()
 
 	map.setValue(2, 0, false);
 
-	map.print();
+    
 	std::cout << "0 0: " << map.getValue(0, 0) << std::endl;
 	std::cout << "2 0: " << map.getValue(2, 0) << std::endl;
 	
 	std::cout << "20 20: " << map.getValue(20, 20) << std::endl;
+	map.print();
 
-
-	Map<int> map2(300, 300);
-	map2.setValue(100, 100, 45);
-
+	Map<int> map2(20, 20);
+	map2.setValue(25, 15, 45);	
+    map2.print();
 	return 0;
 }

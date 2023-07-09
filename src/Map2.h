@@ -1,101 +1,77 @@
-
-#include <iostream>
 #include <vector>
+#include <iostream>
 
 template <typename T>
 class Map
 {
 public:
 
-	Map(int xmax, int yMax){
-		NewArray(xmax, yMax);	
-	};
-	T getValue(int x, int y){
-       if(x < xm && y < ym){
-         return array[x][y];
-	   }
-	   else{
-		std::cout << "not of range" << std::endl;
-	   }
-	   return 0;
-	};
-	void setValue(int x, int y, T empty){
-		if(x < xm && y < ym){
-		  array[x][y] = empty;
-		} else{
-			std::cout << "eror" << std::endl;
-		}
-
-	};
-	 void print(){
-		 for (int i = 0; i < xm; i++) {
-			 for (int j = 0; j < ym; j++) {
-				std::cout << array[i][j] << "  ";
-	 		}
-			 std::cout << std::endl;
-		}
+	Map(int xmax, int yMax)
+		:xy(xmax* yMax)
+	{
+		std::cout << __FUNCTION__ << std::endl;
+		NewArray(xmax, yMax);
 	};
 
 
-
-	void changeSize(int xmax, int ymax){
-		// T Tarr[xm][ym];
+	~Map()
+	{
+		std::cout << __FUNCTION__ << std::endl;
+	}
+	T getValue(int x, int y) {
+		return array[(ym / xm) * x + y];
 		
-		// for(int i = 0;i < xm,i++){
-		// 	for(int j = 0, j < ym,j++){
-        //        Tarr[i][j] = array[i][j];
-		// 	}
-		// }
-		T ** Tarr = array;
-
-		NewArray(xmax,ymax);
-		
-		for(int i = 0;i < xm,i++){
-			for(int j = 0, j < ym,j++){
-               array[i][j] = Tarr[i][j];
+	};
+	void setValue(int x, int y, T value) {
+		array.push_back[(ym / xm) * x + y] = value;
+	};
+	
+	void print() {
+		for (int i = 0; i < xm; i++) {
+			for (int j = 0; j < ym; j++) {
+				std::cout << array[(ym / xm) * i + j] << "  ";
 			}
-
-			
+			std::cout << std::endl;
 		}
+	};
 
-		DeleteArray(Tarr);
+
+
+	void changeSize(int xmax, int ymax) {
+		
+		T* Tarr = array;
+		
+		for (size_t i = 0; i < (xmax * ymax) - xy) ; i++)
+		{
+			array.push_back(0);
+		}
+		xy = (xmax * yMax);
+		xm = xmax;
+		ym = yMax;
+
 	};
 
 private:
-	void CleanArray(){
-		for (int i = 0; i < xm; i++)
-		{
-			for (int j = 0; j < ym;j++)
-			{
-				array[i][j] = 0;
-			}
-			
-		}
-		
-	}
-	void DeleteArray(T** arr){
-		for(int i = 0;i < xm,i++){
-			delete[] arr[i];
-		}
-		delete[] arr;
-	}
+	
+	
 
-	void NewArray(int xmax, int yMax){
-     	array = new T* [xmax];
-		for (int i = 0; i < xmax; i++) {
-        	array[i] = new T [yMax];
-		}
-        
+	void NewArray(int xmax, int yMax) {
+		
 		xm = xmax;
 		ym = yMax;
-		CleanArray();
+		//array.reserve(); что такое? зачем нужен?
+		for (size_t i = 0; i < xy; i++)
+		{
+			array.push_back(0);
+		}
 	}
 
-private:	
-	std::vector array;	
-    int xm = 0;
+private:
+	std::vector<T> array;	
+	//std::list<T> array; как работает? когда нужен vector когда list?
+	int xm = 0;
 	int ym = 0;
-
+	int xy = 0;
 };
 
 
