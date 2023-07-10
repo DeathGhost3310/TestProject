@@ -2,11 +2,11 @@
 #include <iostream>
 
 template <typename T>
-class Map
+class Map1
 {
 public:
 
-	Map(int xmax, int yMax)
+	Map1(int xmax, int yMax)
 		:xy(xmax * yMax)
 	{
 

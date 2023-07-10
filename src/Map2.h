@@ -4,11 +4,11 @@
 #include <iterator>
 
 template <typename T>
-class Map
+class Map2
 {
 public:
 
-	Map(int xmax, int yMax)
+	Map2(int xmax, int yMax)
 	    :xy(xmax * yMax)
 	{	
 		std::cout << __FUNCTION__ << std::endl;
@@ -16,53 +16,31 @@ public:
 	};
 
 
-	~Map()
+	~Map2()
 	{
 		std::cout << __FUNCTION__ << std::endl;
 	}
 	T getValue(int x, int y) {
-		int TV;
-		std::list <T> Tarr = array;
-		if(x <= 0 && y <= 0){
-           return array.front();
-		}
-		if(x > 0 && y > 0){
-		for(int i = 0;i < ((ym / xm)* x + y);i++){
-          Tarr.pop_front();
-		}
-		}
-		if(x <= 0 && y > 0){
-          for(int i = 0;i < y;i++){
-            Tarr.pop_front();
-		  }
-		  return Tarr.front();
-		}
-		if(x > 0 && y <= 0){
-          for(int i = 0;i < x * ym;i++){
-			Tarr.pop_front();
-		  }
-		  return Tarr.front();
-		}
-		if(x == xm && y == ym){
-          return Tarr.back();
+		
+		auto num = getNum(x , y);
+		auto it = array.begin();
+		for (int i = 0; i < num; i++)
+		{
+			it++;
 		}
 		
-		
-		TV = Tarr.front();
-		return TV;
+		return *it;
 		
 	};
 	void setValue(int x, int y, T value) {
-	 std::list <T> Tarr = array;
-	
-      for(int i = 0;i < ym / xm * x + y;i++){
-        Tarr.pop_front();
-	  }
-	  Tarr.push_front(value);
-	  std::list <T> Tarr2 = array;
-	  Tarr.merge(Tarr2);
-	  Tarr.unique();
-	  array = Tarr;
+		auto num = getNum(x, y);
+		auto it = array.begin();
+		
+		for(int i = 0; i < num; ++i) {
+			++it;
+		}
+
+		*it = value;
 	};
 	
 	void print() {
@@ -96,6 +74,10 @@ private:
 		{
 			array.push_back(0);
 		}
+	}
+	int getNum(int x, int y)
+	{
+		return (ym / xm)* x + y;
 	}
 private:
 	std::list<T> array;	
