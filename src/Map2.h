@@ -1,5 +1,7 @@
 #include <vector>
 #include <iostream>
+#include <list>
+#include <iterator>
 
 template <typename T>
 class Map
@@ -7,8 +9,8 @@ class Map
 public:
 
 	Map(int xmax, int yMax)
-		:xy(xmax* yMax)
-	{
+	    :xy(xmax * yMax)
+	{	
 		std::cout << __FUNCTION__ << std::endl;
 		NewArray(xmax, yMax);
 	};
@@ -19,58 +21,87 @@ public:
 		std::cout << __FUNCTION__ << std::endl;
 	}
 	T getValue(int x, int y) {
-		return array[(ym / xm) * x + y];
+		int TV;
+		std::list <T> Tarr = array;
+		if(x <= 0 && y <= 0){
+           return array.front();
+		}
+		if(x > 0 && y > 0){
+		for(int i = 0;i < ((ym / xm)* x + y);i++){
+          Tarr.pop_front();
+		}
+		}
+		if(x <= 0 && y > 0){
+          for(int i = 0;i < y;i++){
+            Tarr.pop_front();
+		  }
+		  return Tarr.front();
+		}
+		if(x > 0 && y <= 0){
+          for(int i = 0;i < x * ym;i++){
+			Tarr.pop_front();
+		  }
+		  return Tarr.front();
+		}
+		if(x == xm && y == ym){
+          return Tarr.back();
+		}
+		
+		
+		TV = Tarr.front();
+		return TV;
 		
 	};
 	void setValue(int x, int y, T value) {
-		array.push_back[(ym / xm) * x + y] = value;
+	 std::list <T> Tarr = array;
+	
+      for(int i = 0;i < ym / xm * x + y;i++){
+        Tarr.pop_front();
+	  }
+	  Tarr.push_front(value);
+	  std::list <T> Tarr2 = array;
+	  Tarr.merge(Tarr2);
+	  Tarr.unique();
+	  array = Tarr;
 	};
 	
 	void print() {
-		for (int i = 0; i < xm; i++) {
-			for (int j = 0; j < ym; j++) {
-				std::cout << array[(ym / xm) * i + j] << "  ";
-			}
+		std::list <T> Tarr = array;
+		for(int i = 0;i < xy;i++){
+          std::cout << Tarr.front() << "  ";
+		  if(i == (xy / 2)){
 			std::cout << std::endl;
+		  }
+		  Tarr.pop_back();
 		}
 	};
-
-
-
 	void changeSize(int xmax, int ymax) {
-		
-		T* Tarr = array;
-		
-		for (size_t i = 0; i < (xmax * ymax) - xy) ; i++)
+		for (size_t i = 0; i < ((xmax * ymax) - xy) ; i++)
 		{
 			array.push_back(0);
 		}
-		xy = (xmax * yMax);
+		xy = (xmax * ymax);
 		xm = xmax;
-		ym = yMax;
-
+		ym = ymax;
 	};
 
 private:
-	
-	
-
 	void NewArray(int xmax, int yMax) {
 		
 		xm = xmax;
 		ym = yMax;
-		//array.reserve(); что такое? зачем нужен?
-		for (size_t i = 0; i < xy; i++)
+	    xy = yMax * xmax;
+		//array.reserve(); пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ? пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ?
+		for (int i = 0; i < xy; i++)
 		{
 			array.push_back(0);
 		}
 	}
-
 private:
-	std::vector<T> array;	
-	//std::list<T> array; как работает? когда нужен vector когда list?
+	std::list<T> array;	
+	//std::list<T> array; пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ? пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ vector пїЅпїЅпїЅпїЅпїЅ list?
 	int xm = 0;
-	int ym = 0;
+	int ym = 0;	
 	int xy = 0;
 };
 

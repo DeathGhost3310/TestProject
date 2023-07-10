@@ -50,7 +50,7 @@ public:
 		// 	}
 		// }
 		T * Tarr = array;
-		xy = (xmax * yMax);
+		xy = (xmax * ymax);
 		NewArray(xmax,ymax);
         
 		for(int i = 0;i < xy;i++){		
@@ -80,6 +80,7 @@ private:
      	array = new T [xmax * yMax];
 		xm = xmax;
 		ym = yMax;
+		xy = xmax * yMax;
 		CleanArray(array);
 	}
 
