@@ -8,10 +8,25 @@ file(GLOB helloworld_SRC
 add_executable(helloworld
 
  src/main.cpp
- src/Map1.h
- src/Map2.h
- src/Map3.h
- src/movementTest
+ src/Map.h
+ src/Map.cpp
+ src/console.h
+ src/console.cpp
+ src/bot.h
+ src/bot.cpp
+ src/controller.cpp
+ src/controller.h
+ src/player.h
+ src/player.cpp
+ src/inventory.h
+ src/inventory.cpp
+ src/item.h
+ src/item.cpp
+ src/Coord.h
+ src/Coord.cpp
+ 
+ 
+ 
  
  )
 
