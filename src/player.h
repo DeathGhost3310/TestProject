@@ -3,7 +3,7 @@
 
 #include "header.h"
 #include "Coord.h"
-
+#include "inventory.h"
 class Map;
 class Unit
 {
@@ -26,19 +26,19 @@ protected:
     Coord m_cord;
 };
 
-class Player : public Unit, public UnitCoord
+class Player : public Unit, public UnitCoord , public Inventory
 {
 public:
+    
     Player(char value, Coord cord);
     ~Player();
-        
+    bool checkPlayer();
     Coord getCord() { return m_cord; };
     
     void move(KeyMove);
     void setMap(Map* map);
 private:
-   
-    
+      
     Map *m_map = nullptr;
 };
 

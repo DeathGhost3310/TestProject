@@ -6,13 +6,15 @@ class Item
 {
 
 public:
-    Item(/* name , descroption */);
+    Item(std::string name, std::string description , int quality);
     ~Item();
-    // string getString()
+    //void bomb();
+    std::string getString();
+    std::string getDiscriptionStr();
 private:
     std::string m_name;
     std::string m_description;
-    
+    int m_quality;
 };
 
 

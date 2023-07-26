@@ -8,6 +8,8 @@ enum class KeyMove
     down = 1,
     right = 2,
     left = 3,
+    open_inventory = 4,
+    //use_item = 5,
     escape,
     none
 };

@@ -43,7 +43,6 @@ std::string Map::getMapString()
 
 	return mapStr;
 }
-
 char Map::getValue(Coord cord){
 	if (m_array[cord])
    {
@@ -53,14 +52,13 @@ char Map::getValue(Coord cord){
 }
 
 void Map::move(Coord start, Coord cdEnd ){
-	setValue(cdEnd, m_array[start]);
+			setValue(cdEnd, m_array[start]);
 
-	setValue(start, nullptr);
-  
+			setValue(start, nullptr);
 };
 
 void Map::setValue(Coord cord, std::shared_ptr<Unit> unit){
-	m_array[cord] =  unit;
+			m_array[cord] = unit;	
 }
 
 

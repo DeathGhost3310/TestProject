@@ -12,8 +12,8 @@ void Bot::moveToPlayer(Player* player)
     Coord pCord = player->getCord();
     
     if (pCord.y < cord.y) { cord.y--; }
-    if(pCord.y > cord.y){cord.y++;}
-    if(pCord.y == cord.y){
+    if(pCord.y > cord.y)
+    {cord.y++;}else if(pCord.y == cord.y){
         if(pCord.x < cord.x){cord.x--;}
         if(pCord.x > cord.x){cord.x++;}
     }                   

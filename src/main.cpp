@@ -21,24 +21,25 @@
 
 int main()
 {
-	Map *map = new Map({16, 40});
+	std::shared_ptr<bool> openInventory(new bool(true));
+	Map* map = new Map({ 16, 40 });
 	std::vector<std::shared_ptr<Bot>> bots;
-	for(int i = 0 ; i < 2; ++i)
+	for (int i = 0; i < 2; ++i)
 	{
-		int rx = 5 + 2*i;
-		int ry = 5 + 2*i;
+		int rx = 5 + 2 * i;
+		int ry = 5 + 2 * i;
 		std::shared_ptr<Bot> bot = std::make_shared<Bot>('q', Coord{ rx, ry }, map);
-		
+
 		bots.push_back(bot);
-		map->setValue({rx , ry},bot);
+		map->setValue({ rx , ry }, bot);
 	}
-	
+
 
 	auto player = std::make_shared<Player>('@', Coord{ 0 ,0 });
 	player->setMap(map);
-	map->setValue({0 , 0}, player);
+	map->setValue({ 0 , 0 }, player);
 
- 	Controller contr;
+	Controller contr;
 	Console console;
 
 	std::string mapString;
@@ -46,23 +47,46 @@ int main()
 	console.mapPrint(mapString);
 
 	KeyMove key = KeyMove::none;// = contr.getChar();
-
-	while (key != KeyMove::escape)
+	bool startGame = true;
+	while (startGame)
 	{
-		key =  contr.getChar();
+		//if (key != KeyMove::escape) {
+			//startGame = false;
+		//}
+		key = contr.getChar();
 		if (key != KeyMove::none)
 		{
-			player->move(key);
+			if (key != KeyMove::open_inventory) {
+				player->move(key);
 
-			for (auto& bot : bots)
-			{
-				bot->moveToPlayer(player.get());
+				for (auto& bot : bots)
+				{
+					bot->moveToPlayer(player.get());
+				}
+
+				mapString = map->getMapString();
+				console.mapPrint(mapString);
 			}
-			mapString = map->getMapString();
-			console.mapPrint(mapString);
-		}
-	}
-	
+			if (key == KeyMove::open_inventory) {
+				//do{
+					mapString = player->getInventoryString();
+					console.mapPrint(mapString);
+					//key = contr.getChar();
+					//player->inventoryMove(key);
+				//} while (key != KeyMove::open_inventory);
 
-	return 0;
+
+			}
+
+		}
+
+
+	}
+		//if (player->checkPlayer()) {
+			//startGame = false;
+		//}
+
+
+
+		return 0;
 }

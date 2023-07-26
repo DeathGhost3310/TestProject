@@ -15,9 +15,11 @@ const char empty = '.';
 class Map
 {
 public:
-   
+    
 	Map(Coord cdMax);
 	~Map();
+	int getCordX() { return m_cdMax.x; }
+	int getCordY() { return m_cdMax.y; }
 	char getValue(Coord cord);
 	void move(Coord start, Coord cdEnd);
 	void setValue(Coord cord, std::shared_ptr<Unit> unit);
