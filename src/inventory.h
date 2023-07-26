@@ -16,7 +16,7 @@ public:
     std::string getInventoryString();
     void pushitem(std::shared_ptr<Item> item);
 private:
-    std::shared_ptr<int> item_num;
+    int item_num = 0;
     int inventory_size;
     int itemQuality = 0;
     std::vector<std::shared_ptr<Item>> m_items;

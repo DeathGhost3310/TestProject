@@ -68,12 +68,12 @@ int main()
 				console.mapPrint(mapString);
 			}
 			if (key == KeyMove::open_inventory) {
-				//do{
+				do{
 					mapString = player->getInventoryString();
 					console.mapPrint(mapString);
-					//key = contr.getChar();
-					//player->inventoryMove(key);
-				//} while (key != KeyMove::open_inventory);
+					key = contr.getChar();
+					player->inventoryMove(key);
+				} while (key != KeyMove::open_inventory);
 
 
 			}
