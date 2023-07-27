@@ -33,12 +33,12 @@ int main()
 		bots.push_back(bot);
 		map->setValue({ rx , ry }, bot);
 	}
-
+	
 
 	auto player = std::make_shared<Player>('@', Coord{ 0 ,0 });
 	player->setMap(map);
 	map->setValue({ 0 , 0 }, player);
-
+	
 	Controller contr;
 	Console console;
 
@@ -63,9 +63,9 @@ int main()
 				{
 					bot->moveToPlayer(player.get());
 				}
-
-				mapString = map->getMapString();
+                 mapString = map->getMapString();
 				console.mapPrint(mapString);
+				
 			}
 			if (key == KeyMove::open_inventory) {
 				do{
@@ -74,7 +74,8 @@ int main()
 					key = contr.getChar();
 					player->inventoryMove(key);
 				} while (key != KeyMove::open_inventory);
-
+				mapString = map->getMapString();
+				console.mapPrint(mapString);
 
 			}
 

@@ -1,7 +1,7 @@
 #include "inventory.h"
 #include "item.h"
 #include "header.h"
-
+#include "Map.h"
 Inventory::Inventory(int size_inventory)
     :inventory_size(size_inventory)
 {
@@ -14,6 +14,9 @@ Inventory::~Inventory()
 {
 
 }
+void Inventory::setMapI(Map* map) {
+    i_map = map;
+}
 void Inventory::inventoryMove(KeyMove key) {
     if (itemQuality >= item_num) { item_num = 0; }
     switch (key) {
@@ -23,6 +26,8 @@ void Inventory::inventoryMove(KeyMove key) {
     case KeyMove::down:
         if (item_num < itemQuality) { item_num += 1; }
         break;
+    case KeyMove::use_item:
+        m_items[item_num]->useItem();
     default:
         break;
     }
@@ -55,10 +60,11 @@ std::string Inventory::getInventoryString()
     invString += "------------------------------------------------";
     
     invString.push_back('\n');
-    
+    invString += m_items[item_num]->getDiscriptionStr();
     return invString;
 }
 void Inventory::pushitem(std::shared_ptr<Item> item) {
     m_items.push_back(item);
+    m_items[itemQuality]->setMap(i_map);
     itemQuality++;
 }

@@ -8,6 +8,7 @@ class Map;
 class Unit
 {
 public:
+
     Unit(char value) :m_value(value) {}
     virtual ~Unit() {}
     char getValue() {return m_value;} ;

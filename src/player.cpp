@@ -7,10 +7,11 @@ Player::Player(char value, Coord cord):
     Unit(value),
     Inventory(15)
 {   
-    std::shared_ptr<Item> dash = std::make_shared<Item>("dash", "=====", 12);
-    std::shared_ptr<Item> bomb = std::make_shared<Item>("bomb","------" , 10);
-    pushitem(bomb);
-    pushitem(dash);
+    //std::shared_ptr<Item> dash = std::make_shared<Item>("dash", "Dash 2 symbol", 12);
+    //std::shared_ptr<Item> bomb = std::make_shared<Item>("bomb","Xz Boom" , 10);
+    //pushitem(bomb);
+    //pushitem(dash);
+    
 }
 
 Player::~Player()
@@ -75,4 +76,9 @@ void Player::move(KeyMove key){
 void Player::setMap(Map* map)
 {
     m_map = map;
+    setMapI(map);
+    std::shared_ptr<Item> dash = std::make_shared<Item>("dash", "Dash 2 symbol", 12);
+    std::shared_ptr<Item> bomb = std::make_shared<Item>("bomb", "Xz Boom", 10);
+    pushitem(bomb);
+    pushitem(dash);
 }

@@ -9,6 +9,7 @@ KeyMove Controller::getChar(){
     if (('d' == key || key == 77) ) { keyMove = KeyMove::right; }
     if (('a' == key || key == 75) ) { keyMove = KeyMove::left;  }
     if ('i' == key) { keyMove = KeyMove::open_inventory; }
+    if ('f' == key) { keyMove = KeyMove::use_item; }
     return keyMove;
 
 }   
