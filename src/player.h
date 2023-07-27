@@ -4,16 +4,18 @@
 #include "header.h"
 #include "Coord.h"
 #include "inventory.h"
+
 class Map;
+
 class Unit
 {
 public:
-
     Unit(char value) :m_value(value) {}
     virtual ~Unit() {}
     char getValue() {return m_value;} ;
 protected:
     char m_value;
+    std::shared_ptr<Inventory> m_inventory;
 };
 class UnitCoord 
 {
@@ -27,7 +29,8 @@ protected:
     Coord m_cord;
 };
 
-class Player : public Unit, public UnitCoord , public Inventory
+///todo не наследовать, инкапсулировать
+class Player : public Unit, public UnitCoord, public Inventory
 {
 public:
     
@@ -37,10 +40,11 @@ public:
     Coord getCord() { return m_cord; };
     
     void move(KeyMove);
-    void setMap(Map* map);
+    void setMap(std::shared_ptr<Map> map);
 private:
       
-    Map *m_map = nullptr;
+    std::weak_ptr<Map> m_map;
+
 };
 
 

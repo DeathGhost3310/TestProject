@@ -9,6 +9,7 @@
 #include "player.h"
 #include "controller.h"
 #include "header.h"
+#include "item.h"
 
 /// <summary>
 /// проверка выхода за пределы массива
@@ -22,7 +23,7 @@
 int main()
 {
 	std::shared_ptr<bool> openInventory(new bool(true));
-	Map* map = new Map({ 16, 40 });
+	std::shared_ptr<Map> map(new Map({ 16, 40 }));
 	std::vector<std::shared_ptr<Bot>> bots;
 	for (int i = 0; i < 2; ++i)
 	{
@@ -37,6 +38,65 @@ int main()
 
 	auto player = std::make_shared<Player>('@', Coord{ 0 ,0 });
 	player->setMap(map);
+
+	std::shared_ptr<Item> dash = std::make_shared<Item>("dash", "Dash 2 symbol", 12, ItemType::dash);
+	std::shared_ptr<Item> bomb = std::make_shared<Item>("bomb", "Xz Boom", 10, ItemType::bomb);
+	player->pushitem(bomb);
+	player->pushitem(dash);
+
+
+	
+
+	auto lam = [map, player]() -> bool
+	{
+		std::cout << "boom";
+		//void Item::bomb() {
+//	
+//	std::shared_ptr<Unit> boom_value(new Unit('-'));
+//	if (m_quality > 0 && timer == 1) {
+//		m_quality--;
+//		timer = 6;	
+//	}
+//	Coord cd_cord;
+//	std::shared_ptr<Map> t_map = m_map;
+//	if (timer == 6) {
+//		cd_cord = player->getCord();
+//		m_map->setValue(cd_cord, m_value);
+//		
+//	}
+//	
+//	if (timer == 3) {
+//		m_map->setValue(cd_cord, boom_value);
+//		cd_cord.x++;
+//		m_map->setValue(cd_cord, boom_value);
+//		cd_cord.x = +2;
+//		m_map->setValue(cd_cord, boom_value);
+//		cd_cord.x--;
+//		cd_cord.y++;
+//		m_map->setValue(cd_cord, boom_value);
+//		cd_cord.y = -2;
+//		m_map->setValue(cd_cord, boom_value);
+//		//timer = 1;
+//	}
+//	if (timer == 2) {
+//		//Sleep(1000);
+//       m_map = t_map;
+//		Sleep(1000);
+//		timer = 0;
+//		delete t_map;
+//		timer == 0;
+//	}
+//	if (timer != 0) { timer--; }
+//}
+
+		return true;
+	};
+
+	bomb->setUseItem(
+		lam
+	
+	);
+
 	map->setValue({ 0 , 0 }, player);
 	
 	Controller contr;

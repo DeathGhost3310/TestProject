@@ -14,9 +14,7 @@ Inventory::~Inventory()
 {
 
 }
-void Inventory::setMapI(Map* map) {
-    i_map = map;
-}
+
 void Inventory::inventoryMove(KeyMove key) {
     if (itemQuality >= item_num) { item_num = 0; }
     switch (key) {
@@ -35,6 +33,7 @@ void Inventory::inventoryMove(KeyMove key) {
 
 std::string Inventory::getInventoryString()
 {
+    ///todo проверить если инвентарь пустой
     std::string invString = "Inventory:\n-------------\n";
     for (int i = 0;i < inventory_size;i++) {
             if(i < m_items.size())
@@ -63,8 +62,8 @@ std::string Inventory::getInventoryString()
     invString += m_items[item_num]->getDiscriptionStr();
     return invString;
 }
+
 void Inventory::pushitem(std::shared_ptr<Item> item) {
     m_items.push_back(item);
-    m_items[itemQuality]->setMap(i_map);
     itemQuality++;
 }

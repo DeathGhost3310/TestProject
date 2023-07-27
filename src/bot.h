@@ -8,7 +8,7 @@ class Player;
 class Bot : public Unit , public UnitCoord
 {
 public:
-    Bot(char value ,Coord cord , Map* map)
+    Bot(char value ,Coord cord , std::shared_ptr<Map> map)
     : UnitCoord(cord),
       Unit(value),
         m_map(map)
@@ -22,7 +22,7 @@ public:
     void moveToPlayer(Player* player);
 private:
 
-    Map* m_map = nullptr;
+    std::shared_ptr<Map> m_map = nullptr;
 };
 
 

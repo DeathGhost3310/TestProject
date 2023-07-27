@@ -24,6 +24,7 @@ add_executable(helloworld
  src/item.cpp
  src/Coord.h
  src/Coord.cpp
+ src/item_type.h
  
  
  
