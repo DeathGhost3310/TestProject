@@ -2,6 +2,7 @@
 #include "item.h"
 #include "header.h"
 #include "Map.h"
+
 Inventory::Inventory(int size_inventory)
     :inventory_size(size_inventory)
 {
@@ -33,7 +34,7 @@ void Inventory::inventoryMove(KeyMove key) {
 
 std::string Inventory::getInventoryString()
 {
-    ///todo проверить если инвентарь пустой
+    ///todo пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
     std::string invString = "Inventory:\n-------------\n";
     for (int i = 0;i < inventory_size;i++) {
             if(i < m_items.size())

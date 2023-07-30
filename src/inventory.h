@@ -5,8 +5,17 @@
 #include <memory>
 #include <vector>
 #include <map>
+
+
+
 class Item;
 class Map;
+
+
+//FILE
+//fstream
+//winapi
+
 
 class Inventory
 {
@@ -17,6 +26,16 @@ public:
     void inventoryMove(KeyMove key);
     std::string getInventoryString();
     void pushitem(std::shared_ptr<Item> item);
+
+    void saveFile();
+    void loadFile();
+
+    void saveFstream();
+    void loadFstream();
+    
+    void saveWinapi();
+    void loadWinapi();
+
 private:
     int item_num = 0;
     int inventory_size;
@@ -24,5 +43,9 @@ private:
 
 protected:
     std::vector<std::shared_ptr<Item>> m_items;
+
+
+
+    
 };
 #endif
