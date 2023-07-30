@@ -1,8 +1,9 @@
-
+#include <thread>
 #include <iostream>
 #include <stdio.h>
 #include <vector>
 
+#include "timer.h"
 #include "console.h"
 #include "Map.h"
 #include "bot.h"
@@ -12,9 +13,9 @@
 #include "item.h"
 
 /// <summary>
-/// проверка выхода за пределы массива
-/// проверка чтобы боты не затирали друг лруга
-/// что должно происходить когда догнал
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+/// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+/// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 /// Coord -> const Coord&
 /// 
 /// </summary>
@@ -23,6 +24,9 @@
 int main()
 {
 	std::shared_ptr<bool> openInventory(new bool(true));
+	Timer& timer = Timer::createTimer();
+	Controller contr;
+	Console console;
 	std::shared_ptr<Map> map(new Map({ 16, 40 }));
 	std::vector<std::shared_ptr<Bot>> bots;
 	for (int i = 0; i < 2; ++i)
@@ -47,47 +51,29 @@ int main()
 
 	
 
-	auto lam = [map, player]() -> bool
+	auto lam = [map, player, &timer, &console]() -> bool
 	{
+		
 		std::cout << "boom";
-		//void Item::bomb() {
-//	
-//	std::shared_ptr<Unit> boom_value(new Unit('-'));
-//	if (m_quality > 0 && timer == 1) {
-//		m_quality--;
-//		timer = 6;	
-//	}
-//	Coord cd_cord;
-//	std::shared_ptr<Map> t_map = m_map;
-//	if (timer == 6) {
-//		cd_cord = player->getCord();
-//		m_map->setValue(cd_cord, m_value);
-//		
-//	}
-//	
-//	if (timer == 3) {
-//		m_map->setValue(cd_cord, boom_value);
-//		cd_cord.x++;
-//		m_map->setValue(cd_cord, boom_value);
-//		cd_cord.x = +2;
-//		m_map->setValue(cd_cord, boom_value);
-//		cd_cord.x--;
-//		cd_cord.y++;
-//		m_map->setValue(cd_cord, boom_value);
-//		cd_cord.y = -2;
-//		m_map->setValue(cd_cord, boom_value);
-//		//timer = 1;
-//	}
-//	if (timer == 2) {
-//		//Sleep(1000);
-//       m_map = t_map;
-//		Sleep(1000);
-//		timer = 0;
-//		delete t_map;
-//		timer == 0;
-//	}
-//	if (timer != 0) { timer--; }
-//}
+		std::shared_ptr<Unit> bomb(new Unit('#'));
+	    Coord cd_cord = player->getCord();
+		map->setValue(cd_cord, bomb);
+        
+		auto l = [map, cd_cord, &console](){
+            auto vec = {Coord{-1, 0}, Coord{1, 0},Coord{0 , 0} , Coord{0, 1}, Coord{0, -1} };
+			std::shared_ptr<Unit> boom_value(new Unit('-'));
+		    for(auto& c : vec ){
+				map->setValue(cd_cord + c, boom_value);
+			}
+			console.mapPrint(map->getMapString());
+			std::this_thread::sleep_for(std::chrono::seconds(1));
+			
+			for(auto& c : vec ){
+				map->setValue(cd_cord + c, nullptr);
+			}
+			console.mapPrint(map->getMapString());
+		};
+		timer.subscribe(6, l);
 
 		return true;
 	};
@@ -99,8 +85,7 @@ int main()
 
 	map->setValue({ 0 , 0 }, player);
 	
-	Controller contr;
-	Console console;
+	
 
 	std::string mapString;
 	mapString = map->getMapString();
@@ -110,6 +95,7 @@ int main()
 	bool startGame = true;
 	while (startGame)
 	{
+		timer.timer();
 		//if (key != KeyMove::escape) {
 			//startGame = false;
 		//}

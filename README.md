@@ -66,3 +66,5 @@ git, cmake, (ninja, conan)
 
 чтение понимание чужого кода
 
+тесты google test
+
