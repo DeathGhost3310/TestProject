@@ -31,7 +31,8 @@ public:
    
 
     void saveFstream();
-    void loadFstream(std::vector<std::shared_ptr<Item>> item,std::vector<int> quality);
+    void loadFstream(std::vector<std::shared_ptr<Item>>& item,std::vector<int>& quality);
+    void loadFstream(const std::string& fileName);
     
     void saveWinapi();
    
