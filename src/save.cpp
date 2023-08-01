@@ -1,6 +1,6 @@
 #include "save.h"
 
-void Save::setPlayer(Player* player) {
+void Save::setPlayer(std::shared_ptr<Player> player) {
 	m_player = player;
 }
 
@@ -53,7 +53,11 @@ void Save::saveMenuMove(KeyMove key) {
 	}
 }
 void Save::fstream_save() {
-	m_player->saveFstream();
+	auto player = m_player.lock();
+	if (player)
+	{
+		player->saveFstream();
+	}
 }
 std::string Save::saveInStr() {
 	std::string saveStr;

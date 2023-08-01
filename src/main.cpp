@@ -100,6 +100,7 @@ int main()
 
 		KeyMove key = KeyMove::none;// = contr.getChar();
 		Save save;
+		save.setPlayer(player);
 		while (key != KeyMove::escape)
 		{
 			timer.timer();

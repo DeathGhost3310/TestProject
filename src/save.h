@@ -14,11 +14,11 @@ public:
 	void saveMenu();
 	void fstream_save();
 	void saveMenuMove(KeyMove key);
-	void setPlayer(Player* player);
+	void setPlayer(std::shared_ptr<Player> player);
 	std::string saveInStr();
 private:
 	bool menuJob = false;
 	int m_select = 1;
-	Player* m_player = nullptr;
+	std::weak_ptr<Player>  m_player;
 };
 #endif

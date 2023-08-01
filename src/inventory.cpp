@@ -40,10 +40,11 @@ void Inventory::saveFstream() {
     if (save.is_open()) {
         int i = 0;
         for (auto item : m_items) {       
-            save << item << " " << m_quality[i];
+            save << item->getString() << " " << m_quality[i] << " ";
             i++;
         }
-        }
+    }
+    save.close();
 }
 void Inventory::loadFstream(std::vector<std::shared_ptr<Item>> item, std::vector<int> quality) {
     m_items = item;
