@@ -10,6 +10,9 @@ KeyMove Controller::getChar(){
     if (('a' == key || key == 75) ) { keyMove = KeyMove::left;  }
     if ('i' == key) { keyMove = KeyMove::open_inventory; }
     if ('f' == key) { keyMove = KeyMove::use_item; }
+    if ('e' == key) { keyMove = KeyMove::select; }
+    if (27 == key) { keyMove = KeyMove::escape; }
+    if ('o' == key) { keyMove = KeyMove::save_menu; }
     return keyMove;
 
 }   

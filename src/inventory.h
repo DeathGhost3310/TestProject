@@ -5,7 +5,7 @@
 #include <memory>
 #include <vector>
 #include <map>
-
+#include <fstream>
 
 
 class Item;
@@ -25,16 +25,16 @@ public:
     ~Inventory();
     void inventoryMove(KeyMove key);
     std::string getInventoryString();
-    void pushitem(std::shared_ptr<Item> item);
+    void pushitem(std::shared_ptr<Item> item,int quality);
 
     void saveFile();
-    void loadFile();
+   
 
     void saveFstream();
-    void loadFstream();
+    void loadFstream(std::vector<std::shared_ptr<Item>> item,std::vector<int> quality);
     
     void saveWinapi();
-    void loadWinapi();
+   
 
 private:
     int item_num = 0;
@@ -43,7 +43,7 @@ private:
 
 protected:
     std::vector<std::shared_ptr<Item>> m_items;
-
+    std::vector<int> m_quality;
 
 
     

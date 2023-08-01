@@ -10,7 +10,9 @@ enum class KeyMove
     left = 3,
     open_inventory = 4,
     use_item = 5,
-    escape,
+    select = 6,
+    save_menu = 7,
+    escape = 8,
     none
 };
 
