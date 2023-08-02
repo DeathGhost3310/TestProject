@@ -7,16 +7,33 @@ int reserve = 0;
 
 int push_back(int value)
 {
-	vector = malloc(sizeof(int));
+	
+    int* t_vector = malloc(sizeof(vector));
+	t_vector = vector;
+    //free(vector);
+	vector = malloc((sizeof(int) * count));
+	for(int i = 0;i < count;i++){
+       vector[i] = t_vector[i];
+	}
+	free(t_vector);
 	vector[count] = value;
 	//calloc(_Count, sizeof(int))
 	//free(vector);
-  /// ... 
+  /// ...
+  count++; 
 }
 
 int pop_back()
 {
-  ///...
+	count--;
+    int* t_vector = malloc(sizeof(vector));
+	t_vector = vector;
+    //free(vector);
+	vector = malloc(sizeof(int) * count);
+	for(int i = 0;i < count;i++){
+       vector[i] = t_vector[i];
+	}
+	free(t_vector);
 }
 
 int getValue(int index)
@@ -28,13 +45,14 @@ int getValue(int index)
 int main()
 {
 	printf("hello");
-
+    
 	for(int i = 0; i < 10; ++i)
 	{
 		push_back(i);
+		printf(getValue(i));
 	}
 	
-
+///*
 	pop_back();
 	
 
@@ -47,6 +65,6 @@ int main()
 	printf("hello3");
 	
 
-
+//*/
 	return 0;
 }
