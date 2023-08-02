@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+char* memory = malloc(10000);
 
 int* vector = NULL;
 int count = 0;
@@ -8,32 +9,47 @@ int reserve = 0;
 int push_back(int value)
 {
 	
-    int* t_vector = malloc(sizeof(vector));
-	t_vector = vector;
-    //free(vector);
+    int* t_vector = vector;
+	
+	count++;
 	vector = malloc((sizeof(int) * count));
-	for(int i = 0;i < count;i++){
+	for(int i = 0;i < count - 1;i++){
        vector[i] = t_vector[i];
 	}
-	free(t_vector);
-	vector[count] = value;
+    
+	if(t_vector != NULL) {
+		free(t_vector);
+	}
+	vector[count - 1] = value;
 	//calloc(_Count, sizeof(int))
 	//free(vector);
   /// ...
-  count++; 
+   
+}
+
+int push_back2(int value)
+{
+	if(count = reserve) {
+		int* t_vector = vector;
+		reserve = count * 2;
+		vector = malloc((sizeof(int) * reserve));
+		for(int i = 0;i < count - 1;i++){
+			vector[i] = t_vector[i];
+		}
+		if(t_vector != NULL) {
+			free(t_vector);
+		}
+
+	}
+
+	count++;
+	vector[count - 1] = value;
 }
 
 int pop_back()
 {
 	count--;
-    int* t_vector = malloc(sizeof(vector));
-	t_vector = vector;
-    //free(vector);
-	vector = malloc(sizeof(int) * count);
-	for(int i = 0;i < count;i++){
-       vector[i] = t_vector[i];
-	}
-	free(t_vector);
+    
 }
 
 int getValue(int index)
@@ -49,7 +65,7 @@ int main()
 	for(int i = 0; i < 10; ++i)
 	{
 		push_back(i);
-		printf(getValue(i));
+		printf("value = %d %s %d %f", getValue(i), "count = ", count);
 	}
 	
 ///*
